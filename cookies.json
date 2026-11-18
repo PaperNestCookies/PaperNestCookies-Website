@@ -1,0 +1,9 @@
+[
+ {"name":"Chocolate Chip","description":"A classic favorite, generously packed with chocolate chips.","image":"","active":true},
+ {"name":"Double Chocolate Fudge","description":"Rich chocolate cookie with plenty of chocolate chips.","image":"","active":true},
+ {"name":"Snickerdoodle","description":"Soft-centered and rolled in cinnamon sugar.","image":"","active":true},
+ {"name":"Pumpkin Chocolate Chip","description":"Soft pumpkin cookie with warm spices and chocolate chips.","image":"","active":true},
+ {"name":"Apple Cinnamon","description":"Apple and cinnamon finished with a sweet glaze.","image":"","active":true},
+ {"name":"Ginger Molasses","description":"A warmly spiced cookie with rich molasses flavor.","image":"","active":true},
+ {"name":"Cookies & Cream","description":"Chocolate sandwich cookie pieces and white chocolate chips.","image":"","active":true}
+]

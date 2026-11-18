@@ -1,0 +1,57 @@
+media:
+  input: assets/uploads
+  output: /assets/uploads
+content:
+  - name: settings
+    label: Website wording & contact
+    type: file
+    path: data/site.json
+    format: json
+    fields:
+      - { name: announcement, label: Top announcement, type: string }
+      - { name: hero_intro, label: Home introduction, type: text }
+      - { name: cookies_intro, label: Cookie gallery introduction, type: text }
+      - { name: events_intro, label: Events introduction, type: text }
+      - { name: phone_display, label: Phone shown to customers, type: string }
+      - { name: phone_href, label: Phone for click-to-call, type: string }
+      - { name: hello_email, label: General email, type: string }
+      - { name: orders_email, label: Order notifications address, type: string }
+      - { name: events_email, label: Event notifications address, type: string }
+  - name: cookies
+    label: Cookie flavors
+    type: file
+    path: data/cookies.json
+    format: json
+    list: true
+    fields:
+      - { name: name, label: Flavor, type: string }
+      - { name: description, label: Description, type: text }
+      - { name: image, label: Cookie photograph, type: image }
+      - { name: active, label: Show on website, type: boolean }
+  - name: events
+    label: Upcoming events
+    type: file
+    path: data/events.json
+    format: json
+    list: true
+    fields:
+      - { name: title, label: Event name, type: string }
+      - { name: date, label: Date (YYYY-MM-DD), type: date }
+      - { name: time, label: Hours, type: string }
+      - { name: location, label: Location, type: string }
+      - { name: description, label: Notes, type: text }
+      - { name: link, label: Event website (optional), type: string }
+  - name: pricing
+    label: Order pricing
+    type: file
+    path: data/pricing.json
+    format: json
+    fields:
+      - { name: minimum_per_flavor, label: Minimum cookies per flavor, type: number }
+      - name: packages
+        label: Cookie packages
+        type: object
+        list: true
+        fields:
+          - { name: quantity, label: Number of cookies, type: number }
+          - { name: price, label: Price in dollars, type: number }

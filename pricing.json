@@ -1,0 +1,4 @@
+{
+  "minimum_per_flavor": 6,
+  "packages": [{"quantity":6,"price":24},{"quantity":10,"price":36},{"quantity":20,"price":70}]
+}

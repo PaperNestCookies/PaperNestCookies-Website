@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#fbf7ee">
+  <meta name="description" content="Paper Nest Cookies makes generously sized cookies in Eugene, Oregon. Browse flavors, request cookie orders for pickup, and find us at local events.">
+  <title>Paper Nest Cookies | Freshly Baked in Eugene</title>
+  <link rel="icon" href="/assets/favicon.png" type="image/png">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="announcement" id="announcement">Freshly baked in Eugene, Oregon</div>
+<header class="site-header">
+  <div class="header-inner container">
+    <a class="brand" href="#home" aria-label="Paper Nest Cookies — Home"><img src="/assets/nest.webp" alt="" width="53" height="53"><span>Paper Nest <small>Cookies</small></span></a>
+    <button class="menu-button" id="menu-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <nav class="navigation" id="main-nav" aria-label="Main navigation"><a href="#cookies">Our Cookies</a><a href="#events">Events & Markets</a><a href="#ordering" class="nav-order">Order Cookies</a><a href="#contact">Contact</a></nav>
+  </div>
+</header>
+<main id="main">
+  <section class="hero" id="home">
+    <div class="hero-inner container">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="small-line"></span> SMALL BATCH BAKING · EUGENE, OREGON</div>
+        <h1>Paper Nest Cookies <em>Freshly Baked in Eugene.</em></h1>
+        <p id="hero-intro">Generously sized cookies, baked with care and ready to share.</p>
+        <div class="actions"><a class="btn primary" href="#ordering">Order Cookies <span aria-hidden="true">↗</span></a><a class="btn outline" href="#events">Find Us at an Event</a></div>
+      </div>
+      <div class="hero-art" aria-label="Paper Nest Cookies logo"><div class="hero-art-inner"><img src="/assets/logo.webp" alt="Paper Nest Cookies illustrated bakery logo" width="600" height="600"></div><span class="ornament orbit-a" aria-hidden="true">✳</span><span class="ornament orbit-b" aria-hidden="true">✳</span></div>
+    </div>
+    <div class="hero-footer"><span>BAKED LOCALLY</span><span class="dot">✦</span><span>SHARED HAPPILY</span><span class="dot">✦</span><span>MADE WITH CARE</span></div>
+  </section>
+  <section class="section cookies-section" id="cookies"><div class="container">
+    <div class="section-heading"><div><span class="eyebrow">SOMETHING FOR EVERY CRAVING</span><h2>Meet our <em>cookies.</em></h2></div><p id="cookies-intro">From familiar favorites to seasonal treats, find something worth sharing.</p></div>
+    <div id="cookie-grid" class="cookie-grid" aria-live="polite"><p>Loading our cookies…</p></div>
+    <p class="section-note">Flavor selections may vary by event. Have a favorite? You can request any listed flavor in your order.</p>
+  </div></section>
+  <section class="section events-section" id="events"><div class="container events-layout">
+    <div class="events-copy"><span class="eyebrow">WHERE TO FIND US</span><h2>Out & about <em>in Eugene.</em></h2><p id="events-intro">Look for us at local markets, bazaars, and community gatherings around Eugene.</p><div id="event-list" class="event-list"><div class="event-empty"><strong>More events coming soon.</strong><span>Keep an eye out for where we'll be popping up next.</span></div></div></div>
+    <div class="event-invite"><div class="event-sprig" aria-hidden="true">✳</div><span class="eyebrow">LET'S WORK TOGETHER</span><h3>Hosting an<br><em>event?</em></h3><p>Organizing a market, bazaar, fundraiser, or community event? We'd love to hear about it.</p><a class="btn primary" href="#event-form">Invite Us to Your Event <span aria-hidden="true">↗</span></a></div>
+  </div></section>
+  <section class="section order-section" id="ordering"><div class="container">
+    <div class="section-heading order-heading"><div><span class="eyebrow">BAKED JUST FOR YOU</span><h2>Order something <em>sweet.</em></h2></div><p>Choose your cookies, request a pickup date, and we'll get in touch to confirm the details. Pay at pickup.</p></div>
+    <div id="price-cards" class="price-cards"></div>
+    <div class="order-shell"><div class="order-form-wrap">
+      <form name="cookie-order" id="order-form" method="POST" action="/thanks.html?type=order" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="cookie-order"><p class="honey"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+        <input type="hidden" name="order_summary" id="order-summary"><input type="hidden" name="order_total" id="order-total"><input type="hidden" name="order_package" id="order-package">
+        <div class="step-label"><span class="step-number">01</span><h3>Pick your package</h3></div><div id="package-options" class="package-options" role="radiogroup" aria-label="Cookie package"></div>
+        <div class="step-label"><span class="step-number">02</span><h3>Choose your flavors</h3></div><p class="form-hint" id="flavor-rule">A minimum of 6 cookies per flavor.</p><div id="flavor-choices" class="flavor-choices"></div>
+        <p id="selection-feedback" class="selection-feedback" role="status"></p>
+        <div class="step-label"><span class="step-number">03</span><h3>Pickup & contact details</h3></div>
+        <div class="field-pair"><label>Your name <input name="customer_name" autocomplete="name" required maxlength="100" placeholder="Full name"></label><label>Email address <input type="email" name="customer_email" autocomplete="email" required maxlength="150" placeholder="you@example.com"></label></div>
+        <div class="field-pair"><label>Phone number <input type="tel" name="customer_phone" autocomplete="tel" required maxlength="30" placeholder="(541) 555-0100"></label><label>Requested pickup date <input type="date" name="requested_pickup_date" id="pickup-date" required></label></div>
+        <label>Anything else we should know? <textarea name="order_notes" rows="3" maxlength="1600" placeholder="Questions or details about your order (optional)"></textarea></label>
+        <div class="order-summary-box"><div><span>Your order</span><strong id="order-summary-label">6 cookies</strong></div><div><span>Total due at pickup</span><strong id="order-total-label">$24</strong></div></div>
+        <p class="form-hint">Submitting sends an order request, not an automatic confirmation. We'll contact you to confirm pickup details. No payment is collected online.</p>
+        <button type="submit" class="btn primary form-submit" id="order-submit" disabled>Submit Order Request <span aria-hidden="true">↗</span></button>
+      </form>
+    </div><aside class="order-aside"><img src="/assets/nest.webp" alt="" width="175" height="175"><div class="aside-divider"></div><h3>Made for sharing.<br><em>Or keeping.</em></h3><p>From a box of six to a bigger get-together, there's always a good reason for cookies.</p><div class="aside-foot">✳ &nbsp; BAKED WITH CARE &nbsp; ✳</div></aside></div>
+  </div></section>
+  <section class="section contact-section" id="contact"><div class="container"><div class="section-heading"><div><span class="eyebrow">KEEP IN TOUCH</span><h2>Loved your cookie? <em>Say hello.</em></h2></div><p>Questions about cookies, an event, or something else? We'd love to hear from you.</p></div>
+    <div class="contact-grid"><div class="contact-card"><h3>Drop us a note</h3><form name="general-inquiry" method="POST" action="/thanks.html?type=message" data-netlify="true" netlify-honeypot="bot-field"><input type="hidden" name="form-name" value="general-inquiry"><p class="honey"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p><label>Your name <input name="name" required autocomplete="name"></label><label>Email address <input type="email" name="email" required autocomplete="email"></label><label>Message <textarea name="message" rows="4" required maxlength="2000" placeholder="How can we help?"></textarea></label><button type="submit" class="btn primary form-submit">Send Message <span aria-hidden="true">↗</span></button></form></div>
+    <div class="contact-card" id="event-form"><h3>Invite us to an event</h3><form name="event-inquiry" method="POST" action="/thanks.html?type=event" data-netlify="true" netlify-honeypot="bot-field"><input type="hidden" name="form-name" value="event-inquiry"><p class="honey"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p><label>Your name <input name="name" required autocomplete="name"></label><label>Email address <input type="email" name="email" required autocomplete="email"></label><label>Event name <input name="event_name" required></label><div class="field-pair"><label>Event date <input name="event_date" type="date" required></label><label>Event location <input name="event_location" required placeholder="City or venue"></label></div><label>Event details <textarea name="message" rows="3" required maxlength="2000" placeholder="Tell us about your event"></textarea></label><button type="submit" class="btn primary form-submit">Send Event Inquiry <span aria-hidden="true">↗</span></button></form></div></div>
+    <div class="direct-contact"><span>OR REACH US DIRECTLY</span><a id="hello-link" href="mailto:hello@papernestcookies.com">hello@papernestcookies.com</a><a id="phone-link" href="tel:+15416003170">(541) 600-3170</a><span>CALL OR TEXT · EUGENE, OREGON</span></div>
+  </div></section>
+</main>
+<footer class="footer"><div class="container footer-inner"><a class="footer-brand" href="#home"><img src="/assets/nest.webp" alt="" width="54" height="54">Paper Nest Cookies</a><div><span>Freshly baked in Eugene, Oregon.</span><small>© <span id="year"></span> Paper Nest Cookies. All rights reserved.</small></div><a href="#home" class="back-top">Back to top ↑</a></div></footer>
+</body></html>
