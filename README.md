@@ -58,3 +58,11 @@ The homepage is `index.html`, linking to `cookies.html`, `order.html`, `events.h
 ## Version 3
 
 Retains the existing hero/header design while moving Cookies, Orders, Events, and Contact to their own pages. Events wording now includes Eugene and Springfield. Removed decorative arrows from buttons and navigation tiles.
+
+## Version 4: Netlify forms reliability fix
+
+- All three forms now POST `application/x-www-form-urlencoded` to Netlify using `fetch`, with a 20-second timeout and visible retry instructions on errors.
+- The order size is recorded in a **static hidden** `chosen_size` input so Netlify can discover it at deploy time; the visible dynamically created package radios are for interface interaction only.
+- A success page is shown only after an HTTP success response. **This alone does not prove that Netlify actually captured a submission.** Verify entries in Netlify's Forms dashboard, and set up notifications for each form.
+- **Important:** After enabling form detection, this new commit/deploy is necessary for Netlify to re-scan and register the forms. Confirm all three appear as `cookie-order`, `general-inquiry`, and `event-inquiry` under Netlify Forms before accepting customer orders.
+- A static preview or direct `file://` access cannot test form delivery. Test on the published Netlify URL.

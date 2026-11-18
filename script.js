@@ -17,12 +17,64 @@ function renderEvents(events){const target=$('event-list');if(!target)return;tar
 function loadSite(site){const set=(id,value)=>{if(value&&$(id))$(id).textContent=value};set('announcement',site.announcement);set('hero-intro',site.hero_intro);set('cookies-intro',site.cookies_intro);set('events-intro',site.events_intro);if(site.hello_email&&$('hello-link')){const a=$('hello-link');a.textContent=site.hello_email;a.href='mailto:'+site.hello_email}if(site.phone_display&&site.phone_href&&$('phone-link')){const a=$('phone-link');a.textContent=site.phone_display;a.href='tel:'+site.phone_href}}
 function setupOrder(cookies,pricing){const form=$('order-form');if(!form)return;const available=cookies.filter(c=>c.active!==false);const packs=pricing.packages.filter(p=>Number.isSafeInteger(Number(p.quantity))&&Number(p.quantity)>0&&Number(p.price)>=0).map(p=>({quantity:Number(p.quantity),price:Number(p.price)})).sort((a,b)=>a.quantity-b.quantity);if(!packs.length){$('selection-feedback').textContent='Ordering is temporarily unavailable. Please contact us directly.';return}const minimum=Math.max(1,Number(pricing.minimum_per_flavor)||6);let selected=packs[0];let quantities={};$('flavor-rule').textContent=`Select at least ${minimum} cookies per chosen flavor. You can mix flavors in larger packages.`;
 const priceCards=$('price-cards');packs.forEach(p=>{const card=el('div','price-card');const number=el('strong','',String(p.quantity));const word=el('span','',p.quantity===1?'cookie':'cookies');const cost=el('b','',formatMoney(p.price));card.append(number,word,cost);priceCards.append(card)});
-const choices=$('package-options');packs.forEach((p,i)=>{const label=el('label','package-option');const radio=el('input');radio.type='radio';radio.name='chosen_size';radio.value=String(p.quantity);radio.checked=i===0;radio.addEventListener('change',()=>{selected=p;quantities={};renderFlavorSelects();validateOrder()});label.append(radio,el('strong','',`${p.quantity} cookies`),el('span','',formatMoney(p.price)));choices.append(label)});
+const choices=$('package-options');packs.forEach((p,i)=>{const label=el('label','package-option');const radio=el('input');radio.type='radio';radio.name='package_choice';radio.value=String(p.quantity);radio.checked=i===0;radio.addEventListener('change',()=>{selected=p;quantities={};renderFlavorSelects();validateOrder()});label.append(radio,el('strong','',`${p.quantity} cookies`),el('span','',formatMoney(p.price)));choices.append(label)});
 function renderFlavorSelects(){const list=$('flavor-choices');list.replaceChildren();available.forEach((c,index)=>{const row=el('div','flavor-row');const label=el('label','',c.name);const id=`flavor-${index}`;label.htmlFor=id;const select=el('select');select.id=id;select.setAttribute('aria-label',c.name+' quantity');const options=[0,...Array.from({length:Math.max(0,selected.quantity-minimum+1)},(_,i)=>i+minimum)];options.forEach(n=>{const o=el('option','',String(n));o.value=String(n);o.selected=(quantities[c.name]||0)===n;select.append(o)});select.addEventListener('change',()=>{quantities[c.name]=Number(select.value);validateOrder()});row.append(label,select);list.append(row)})}
-function validateOrder(){const count=Object.values(quantities).reduce((s,v)=>s+Number(v||0),0);const valid=count===selected.quantity&&Object.values(quantities).every(v=>!v||v>=minimum);$('order-summary-label').textContent=count+' of '+selected.quantity+' cookies';$('order-total-label').textContent=formatMoney(selected.price);$('order-package').value=String(selected.quantity);$('order-total').value=formatMoney(selected.price);const desc=available.filter(c=>quantities[c.name]>0).map(c=>`${c.name}: ${quantities[c.name]}`).join('; ');$('order-summary').value=desc;const feedback=$('selection-feedback');feedback.textContent=valid?'✓ Your cookie selection is ready.':count>selected.quantity?`Please remove ${count-selected.quantity} cookies.`:count<selected.quantity?`Choose ${selected.quantity-count} more cookies.`:'Please check each flavor quantity.';$('order-submit').disabled=!valid;return valid}
+function validateOrder(){const count=Object.values(quantities).reduce((s,v)=>s+Number(v||0),0);const valid=count===selected.quantity&&Object.values(quantities).every(v=>!v||v>=minimum);$('order-summary-label').textContent=count+' of '+selected.quantity+' cookies';$('order-total-label').textContent=formatMoney(selected.price);$('order-package').value=String(selected.quantity);$('chosen-size').value=String(selected.quantity);$('order-total').value=formatMoney(selected.price);const desc=available.filter(c=>quantities[c.name]>0).map(c=>`${c.name}: ${quantities[c.name]}`).join('; ');$('order-summary').value=desc;const feedback=$('selection-feedback');feedback.textContent=valid?'✓ Your cookie selection is ready.':count>selected.quantity?`Please remove ${count-selected.quantity} cookies.`:count<selected.quantity?`Choose ${selected.quantity-count} more cookies.`:'Please check each flavor quantity.';$('order-submit').disabled=!valid;return valid}
 form.addEventListener('submit',event=>{if(!validateOrder()){event.preventDefault();$('selection-feedback').focus();return}const date=$('pickup-date').value;if(!date||date<localISODate()){event.preventDefault();$('pickup-date').setCustomValidity('Please select today or a future date.');$('pickup-date').reportValidity();return}$('pickup-date').setCustomValidity('')});$('pickup-date').min=localISODate();$('pickup-date').addEventListener('change',()=>$('pickup-date').setCustomValidity(''));renderFlavorSelects();validateOrder()}
 function formatMoney(n){return '$'+Number(n).toLocaleString('en-US',{minimumFractionDigits:Number(n)%1?2:0,maximumFractionDigits:2})}
 function localISODate(){const now=new Date();const yyyy=now.getFullYear(),mm=String(now.getMonth()+1).padStart(2,'0'),dd=String(now.getDate()).padStart(2,'0');return `${yyyy}-${mm}-${dd}`}
 function setupNavigation(){const toggle=$('menu-toggle'),nav=$('main-nav');if(!toggle||!nav)return;toggle.addEventListener('click',()=>{const open=nav.classList.toggle('is-open');toggle.setAttribute('aria-expanded',String(open));toggle.setAttribute('aria-label',open?'Close menu':'Open menu')});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('is-open');toggle.setAttribute('aria-expanded','false')}))}
-async function start(){setupNavigation();if($('year'))$('year').textContent=new Date().getFullYear();const [site,cookies,events,pricing]=await Promise.all([getData('/data/site.json',{}),getData('/data/cookies.json',fallbackCookies),getData('/data/events.json',[]),getData('/data/pricing.json',fallbackPricing)]);loadSite(site);renderCookies(cookies);renderEvents(events);setupOrder(cookies,pricing)}
+
+// Submit through Netlify Forms as URL-encoded data, and display actionable errors.
+// A successful HTTP response is not a guarantee that the form was registered;
+// verify all form names and actual entries in the Netlify Forms dashboard.
+function setupNetlifyForms(){
+  document.querySelectorAll('form[data-netlify="true"]').forEach(form=>{
+    const button=form.querySelector('button[type="submit"]');
+    const feedback=form.querySelector('.submission-feedback');
+    if(!button||!feedback)return;
+    let sending=false;
+    form.addEventListener('submit',async event=>{
+      event.preventDefault();
+      if(sending)return;
+      if(!form.reportValidity())return;
+      if(form.id==='order-form'){
+        const notice=$('selection-feedback');
+        if(button.disabled){if(notice)notice.focus();return;}
+      }
+      sending=true;
+      button.disabled=true;
+      const original=button.textContent;
+      button.textContent='Sending…';
+      feedback.hidden=false;
+      feedback.className='submission-feedback';
+      feedback.textContent='Sending your request…';
+      const timeout=new AbortController();
+      const timer=setTimeout(()=>timeout.abort(),20000);
+      try{
+        const data=new FormData(form);
+        data.set('form-name',form.getAttribute('name'));
+        const response=await fetch('/',{
+          method:'POST',
+          headers:{'Content-Type':'application/x-www-form-urlencoded'},
+          body:new URLSearchParams(data).toString(),
+          signal:timeout.signal
+        });
+        if(!response.ok)throw new Error('HTTP '+response.status);
+        const dest=new URL(form.getAttribute('action')||'/thanks.html',location.origin);
+        location.assign(dest.pathname+dest.search);
+      }catch(error){
+        feedback.classList.add('submission-error');
+        feedback.textContent='Your request could not be sent. Please try again, or email hello@papernestcookies.com. No order has been confirmed.';
+        console.error('Paper Nest form submission failed:',error);
+        button.textContent=original;
+        button.disabled=false;
+        sending=false;
+        feedback.focus();
+      }finally{clearTimeout(timer)}
+    });
+  });
+}
+
+async function start(){setupNavigation();setupNetlifyForms();if($('year'))$('year').textContent=new Date().getFullYear();const [site,cookies,events,pricing]=await Promise.all([getData('/data/site.json',{}),getData('/data/cookies.json',fallbackCookies),getData('/data/events.json',[]),getData('/data/pricing.json',fallbackPricing)]);loadSite(site);renderCookies(cookies);renderEvents(events);setupOrder(cookies,pricing)}
 start();
