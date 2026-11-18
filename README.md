@@ -24,7 +24,7 @@ Photographs can be uploaded to `assets/uploads/` and selected for cookies in Pag
 
 ## Important: Netlify Forms setup (before accepting orders)
 
-The website includes three distinct Netlify Forms in the static `index.html` file:
+The website includes three distinct Netlify Forms in the static `order.html` and `contact.html` files:
 
 - `cookie-order` — **orders@papernestcookies.com**
 - `event-inquiry` — **events@papernestcookies.com**
@@ -49,3 +49,12 @@ After the first deployment:
 - The intended official domain is `papernestcookies.com`, managed separately at Porkbun. Do not change domain DNS until ready.
 - Netlify Forms submissions consume plan allowances; check the Netlify dashboard for current usage and costs.
 - A public GitHub repository contains public website source and photos, **not** customer order submissions. Customer submissions are stored by Netlify Forms.
+
+
+## Version 2: Separate pages
+
+The homepage is `index.html`, linking to `cookies.html`, `order.html`, `events.html`, and `contact.html`. All content still comes from the same `/data/*.json` files. Website forms live on the order and contact pages. Commit and push all website files using GitHub Desktop.
+
+## Version 3
+
+Retains the existing hero/header design while moving Cookies, Orders, Events, and Contact to their own pages. Events wording now includes Eugene and Springfield. Removed decorative arrows from buttons and navigation tiles.

@@ -3,3 +3,23 @@
 @media(max-width:900px){.navigation{gap:18px}.hero-inner{gap:25px}.events-layout{gap:28px}.cookie-grid{grid-template-columns:repeat(3,1fr)}.order-shell{grid-template-columns:1fr}.order-aside{display:none}.section{padding:78px 0}}
 @media(max-width:680px){.container{width:min(100% - 34px,560px)}.header-inner{min-height:69px}.brand{font-size:14px}.brand img{width:44px;height:44px}.brand small{font-size:10px}.menu-button{display:flex;flex-direction:column;gap:5px;align-items:center;justify-content:center;border:0;background:transparent;width:45px;height:45px}.menu-button span{background:var(--brown);height:2px;width:23px}.navigation{display:none;position:absolute;top:100%;left:0;right:0;background:var(--cream);padding:22px 25px;flex-direction:column;align-items:stretch;box-shadow:0 8px 16px #0001}.navigation.is-open{display:flex}.navigation a{padding:8px 0}.navigation .nav-order{text-align:center;padding:12px}.hero-inner{grid-template-columns:1fr;gap:15px;padding-block:48px 28px}.hero-copy{order:2;text-align:center}.hero h1{font-size:38px;margin:18px 0}.hero-copy>p{font-size:15px;margin-inline:auto}.hero-art{order:1;min-height:0}.hero-art-inner{width:min(72vw,305px)}.ornament{display:none}.actions{justify-content:center;gap:9px}.actions .btn{font-size:11px;padding:11px 13px}.hero-footer{gap:13px;font-size:8px;letter-spacing:.1em;flex-wrap:wrap}.section{padding:62px 0}.section-heading{display:block;margin-bottom:28px}.section-heading>p{margin-top:17px}.section-heading h2,.events-copy h2{font-size:35px}.cookie-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 13px}.cookie-card h3{font-size:14px;margin-top:11px}.cookie-card p{font-size:11px}.events-layout{grid-template-columns:1fr;gap:30px}.event-invite{padding:37px 30px;min-height:0}.event-invite h3{font-size:32px}.price-cards{gap:6px}.price-card{padding:17px 5px}.price-card strong{font-size:25px}.price-card b{font-size:18px}.order-form-wrap{padding:23px 17px}.order-heading{margin-bottom:27px}.field-pair{grid-template-columns:1fr;gap:0}.contact-grid{grid-template-columns:1fr;gap:16px}.contact-card{padding:26px 20px}.direct-contact{gap:14px;flex-direction:column}.footer-inner{flex-direction:column;text-align:center;gap:15px}.footer-inner>div{order:2}.back-top{order:1}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+
+/* Version 2: intentional multi-page navigation and homepage */
+.navigation a[aria-current="page"]{text-decoration:underline;text-underline-offset:7px;text-decoration-color:var(--sage)}
+.home-tiles{background:var(--ivory);padding-top:75px}
+.home-tiles-heading{text-align:center;max-width:650px;margin:0 auto 36px}
+.home-tiles-heading h2{font:400 clamp(32px,4vw,48px)/1.2 var(--heading);color:var(--brown-dark);margin:14px 0}
+.home-tiles-heading p{font-size:14px;color:var(--muted)}
+.destination-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:19px}
+.destination-tile{background:#f1e7d8;min-height:275px;padding:28px 34px;display:flex;flex-direction:column;align-items:flex-start;transition:transform .2s ease,box-shadow .2s ease;border:1px solid #e9ddcc}
+.destination-tile:hover{transform:translateY(-3px);box-shadow:0 12px 25px #46271014}
+.destination-tile:focus-visible{outline:3px solid var(--sage)}
+.destination-tile.tile-green{background:#e6ebdc}.destination-tile.tile-sand{background:#f6efe4}.destination-tile.tile-ivory{background:#fbf8f0}
+.tile-number{letter-spacing:.16em;font-size:10px;font-weight:700;color:#806b53}
+.tile-icon{height:80px;display:flex;align-items:center;margin:10px 0 3px}.tile-icon img{width:72px;height:72px;object-fit:contain}
+.tile-typographic{font:400 27px var(--heading);color:var(--brown)}
+.destination-tile h3{font:400 25px var(--heading);color:var(--brown-dark);margin:7px 0}
+.destination-tile p{font-size:13px;color:var(--muted);margin:0 0 16px}
+.tile-link{color:var(--brown);font-size:12px;font-weight:700;margin-top:auto}
+@media(max-width:680px){.home-tiles{padding-top:50px}.destination-grid{grid-template-columns:1fr;gap:12px}.destination-tile{min-height:220px;padding:25px}.tile-icon{height:56px}.tile-icon img{height:56px;width:56px}.destination-tile h3{font-size:22px}}
+@media(prefers-reduced-motion:reduce){.destination-tile{transition:none}}

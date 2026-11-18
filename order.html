@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><title>Order Cookies | Paper Nest Cookies</title><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#fbf7ee"><meta name="description" content="Paper Nest Cookies — fresh, generously sized cookies baked in Eugene, Oregon."><link rel="icon" href="/assets/favicon.png" type="image/png"><link rel="stylesheet" href="/style.css"><script src="/script.js" defer></script></head><body><a class="skip" href="#main">Skip to content</a><div class="announcement" id="announcement">Freshly baked in Eugene, Oregon</div><header class="site-header">
+<div class="header-inner container">
+<a aria-label="Paper Nest Cookies — Home" class="brand" href="/"><img alt="" height="53" src="/assets/nest.webp" width="53"/><span>Paper Nest <small>Cookies</small></span></a>
+<button aria-controls="main-nav" aria-expanded="false" aria-label="Open menu" class="menu-button" id="menu-toggle"><span></span><span></span><span></span></button>
+<nav aria-label="Main navigation" class="navigation" id="main-nav"><a href="/cookies.html">Our Cookies</a><a href="/events.html">Events &amp; Markets</a><a class="nav-order" aria-current="page" href="/order.html">Order Cookies</a><a href="/contact.html">Contact</a></nav>
+</div>
+</header><main id="main"><section class="section order-section" id="ordering"><div class="container">
+<div class="section-heading order-heading"><div><span class="eyebrow">BAKED JUST FOR YOU</span><h2>Order something <em>sweet.</em></h2></div><p>Choose your cookies, request a pickup date, and we'll get in touch to confirm the details. Pay at pickup.</p></div>
+<div class="price-cards" id="price-cards"></div>
+<div class="order-shell"><div class="order-form-wrap">
+<form action="/thanks.html?type=order" data-netlify="true" id="order-form" method="POST" name="cookie-order" netlify-honeypot="bot-field">
+<input name="form-name" type="hidden" value="cookie-order"/><p class="honey"><label>Leave this empty <input autocomplete="off" name="bot-field" tabindex="-1"/></label></p>
+<input id="order-summary" name="order_summary" type="hidden"/><input id="order-total" name="order_total" type="hidden"/><input id="order-package" name="order_package" type="hidden"/>
+<div class="step-label"><span class="step-number">01</span><h3>Pick your package</h3></div><div aria-label="Cookie package" class="package-options" id="package-options" role="radiogroup"></div>
+<div class="step-label"><span class="step-number">02</span><h3>Choose your flavors</h3></div><p class="form-hint" id="flavor-rule">A minimum of 6 cookies per flavor.</p><div class="flavor-choices" id="flavor-choices"></div>
+<p class="selection-feedback" id="selection-feedback" role="status"></p>
+<div class="step-label"><span class="step-number">03</span><h3>Pickup &amp; contact details</h3></div>
+<div class="field-pair"><label>Your name <input autocomplete="name" maxlength="100" name="customer_name" placeholder="Full name" required=""/></label><label>Email address <input autocomplete="email" maxlength="150" name="customer_email" placeholder="you@example.com" required="" type="email"/></label></div>
+<div class="field-pair"><label>Phone number <input autocomplete="tel" maxlength="30" name="customer_phone" placeholder="(541) 555-0100" required="" type="tel"/></label><label>Requested pickup date <input id="pickup-date" name="requested_pickup_date" required="" type="date"/></label></div>
+<label>Anything else we should know? <textarea maxlength="1600" name="order_notes" placeholder="Questions or details about your order (optional)" rows="3"></textarea></label>
+<div class="order-summary-box"><div><span>Your order</span><strong id="order-summary-label">6 cookies</strong></div><div><span>Total due at pickup</span><strong id="order-total-label">$24</strong></div></div>
+<p class="form-hint">Submitting sends an order request, not an automatic confirmation. We'll contact you to confirm pickup details. No payment is collected online.</p>
+<button class="btn primary form-submit" disabled="" id="order-submit" type="submit">Submit Order Request</button>
+</form>
+</div><aside class="order-aside"><img alt="" height="175" src="/assets/nest.webp" width="175"/><div class="aside-divider"></div><h3>Made for sharing.<br/><em>Or keeping.</em></h3><p>From a box of six to a bigger get-together, there's always a good reason for cookies.</p><div class="aside-foot">✳   BAKED WITH CARE   ✳</div></aside></div>
+</div></section></main><footer class="footer"><div class="container footer-inner"><a class="footer-brand" href="/"><img alt="" height="54" src="/assets/nest.webp" width="54"/>Paper Nest Cookies</a><div><span>Freshly baked in Eugene, Oregon.</span><small>© <span id="year"></span> Paper Nest Cookies. All rights reserved.</small></div><a class="back-top" href="/">Home</a></div></footer></body></html>
